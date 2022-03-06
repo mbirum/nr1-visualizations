@@ -7,11 +7,10 @@ import {
     AutoSizer
 } from 'nr1';
 import Grid from './Grid';
-import { sliAttainment } from './nrql/queries';
 
 const criticalColor = "#bf362c";
 const warningColor = "#d9c743";
-const goodColor = "#24a359";
+const goodColor = "#159663";
 
 export default class JourneySlosVisualization extends React.Component {
     

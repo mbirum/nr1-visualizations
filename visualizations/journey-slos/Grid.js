@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Hex from "./Hex";
 import styled from "styled-components";
+import { PlatformStateContext } from 'nr1';
 
 const hexWidth = 65;
 const strokeWidth = 4;
@@ -77,13 +78,21 @@ const Grid = props => {
 
   return (
     <Wrapper ref={element => setGridRef(element)}>
-      {getRows().map((row, index) => (
-        <Row key={index}>
-          {row.map((sli, index) => (
-            <Hex key={index} sli={sli} strokeWidth />
-          ))}
-        </Row>
-      ))}
+      <PlatformStateContext.Consumer>
+        {
+          (platformState) => {
+              return <>
+                {getRows().map((row, index) => (
+                  <Row key={index}>
+                    {row.map((sli, index) => (
+                      <Hex key={index} sli={sli} timerange={platformState.timerange} strokeWidth />
+                    ))}
+                  </Row>
+                ))}
+              </>
+          }
+        }
+      </PlatformStateContext.Consumer>
     </Wrapper>
   );
   
