@@ -6,4 +6,4 @@ SINCE #since
 TIMESERIES AUTO
 `;
 
-export const { sliAttainment };
+export default sliAttainment;

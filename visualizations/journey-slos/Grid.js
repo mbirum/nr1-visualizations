@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {
-  Popover, 
-  PopoverBody, 
-  PopoverTrigger
-} from 'nr1';
+import Hex from "./Hex";
 import styled from "styled-components";
-import Hexagon from "react-hexagon";
-import isFunction from "lodash/isFunction";
-import Gradient from "./Gradient";
 
 const hexWidth = 65;
 const strokeWidth = 4;
-
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -38,31 +30,6 @@ const Row = styled.div`
     margin-left: calc((${hexWidth}px / 2) + 2px);
   }
 `;
-
-const tryInvoke = (func, params = [], defaultValue = null) => {
-  return isFunction(func) ? func(...params) : defaultValue;
-};
-
-const renderHexagonContent = (label) => {
-  return (
-    <text
-      x="50%"
-      y="56%"
-      fontSize={100}
-      fontWeight="lighter"
-      style={{ fill: "white" }}
-      textAnchor="middle"
-    >
-      {label}
-    </text>
-  );
-};
-
-const Hex = ({ children, hexLabel, style, ...rest }) => (
-  <Hexagon style={style} {...rest}>
-    {tryInvoke(renderHexagonContent, [hexLabel], <tspan />)}
-  </Hexagon>
-);
 
 const Grid = props => {
   const [gridWidth, setGridWidth] = useState(0);
@@ -113,27 +80,7 @@ const Grid = props => {
       {getRows().map((row, index) => (
         <Row key={index}>
           {row.map((sli, index) => (
-            <Popover>
-                <PopoverTrigger>
-                  <Hex key={index}
-                    className="hex"
-                    hexLabel={sli.id}
-                    style={{ fill: `${sli.color}`, stroke: "none", strokeWidth }}
-                  >
-                  </Hex>
-                </PopoverTrigger>
-                <PopoverBody>
-                    <div className="popover-text">
-                      <p>{sli.id}</p>
-                      <p>asdfasdfasdfasdf</p>
-                      <p>nvioerwjoi</p>
-                      <p>popwoj</p>
-                      <p>qwqwqqw</p>
-                      <p>ojjwnvninvindiwnowdonvowdvmowodmvw</p>
-                    </div>
-                </PopoverBody>
-            </Popover>
-            
+            <Hex key={index} sli={sli} strokeWidth />
           ))}
         </Row>
       ))}
