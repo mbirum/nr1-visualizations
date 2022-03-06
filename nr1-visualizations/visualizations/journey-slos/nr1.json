@@ -1,0 +1,26 @@
+{
+    "schemaType": "VISUALIZATION",
+    "id": "journey-slos",
+    "displayName": "Journey SLOs",
+    "description": "",
+    "configuration": [
+        {
+            "name": "journeyName",
+            "title": "Journey Name",
+            "type": "string"
+        },
+        {
+            "name": "slis",
+            "title": "SLIs",
+            "type": "collection",
+            "items": [
+                {
+                    "name": "id",
+                    "title": "SLI ID",
+                    "description": "An SLI ID to include in this journey",
+                    "type": "string"
+                }
+            ]
+        }
+    ]
+}

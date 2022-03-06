@@ -1,0 +1,47 @@
+.EmptyState,
+.ErrorState {
+    height: 100%;
+    text-align: center;
+
+    &-cardBody {
+        height: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+.ErrorState-headingText {
+    color: darkgrey;
+}
+
+.hex-label {
+    z-index: 99999;
+    color:black;
+    font-size:15px;
+}
+
+.hex {
+    opacity: 0.7;
+    transition: 0.2s;
+}
+
+.hex:hover {
+    cursor:pointer;
+    opacity:1;
+}
+
+.journey-name {
+    font-size:16px;
+    font-weight:100;
+    padding-left: 45px;
+    padding-top:10px;
+    margin-bottom:-20px;
+}
+
+.popover-text {
+    padding:10px;
+    overflow: auto;
+    overflow-wrap: normal;
+}
