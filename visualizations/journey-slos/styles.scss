@@ -32,7 +32,7 @@
     opacity:1;
 }
 
-.journey-name {
+.group-name {
     font-size:16px;
     font-weight:100;
     padding-left: 45px;
@@ -40,8 +40,14 @@
     margin-bottom:-25px;
 }
 
-.popover-text {
-    padding:10px;
+.popover-chart {
+    padding:20px;
     overflow: auto;
     overflow-wrap: normal;
+    min-width:400px;
+    max-width:400px; 
+}
+
+.popover-name {
+    padding-bottom:10px;
 }

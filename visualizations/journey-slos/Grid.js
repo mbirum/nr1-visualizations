@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Hex from "./Hex";
 import styled from "styled-components";
-import { PlatformStateContext } from 'nr1';
+import { 
+  PlatformStateContext, 
+  NerdGraphQuery 
+} from 'nr1';
 
-const hexWidth = 65;
+const hexWidth = 70;
 const strokeWidth = 4;
 
 const Wrapper = styled.div`
@@ -35,6 +38,7 @@ const Row = styled.div`
 const Grid = props => {
   const [gridWidth, setGridWidth] = useState(0);
   const [gridRef, setGridRef] = useState(null);
+  const [serviceLevelMap, setServiceLevelMap] = useState([]);
 
   function updateWidth() {
     if (gridRef) {
@@ -52,9 +56,29 @@ const Grid = props => {
     return () => window.removeEventListener("resize", updateWidth);
   }, [gridRef]); 
 
+  async function populateServiceLevelMap() {
+    const graphqlQuery = `
+      {
+        actor {
+          entity(guid: "${props.guid}") {
+            serviceLevel {
+              indicators {
+                id
+                name
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const results = await NerdGraphQuery.query({query: graphqlQuery});
+    setServiceLevelMap(results.data.actor.entity.serviceLevel.indicators);
+  }
+
   useEffect(() => {
-    
-  }, [props.slis]);
+    populateServiceLevelMap();
+  }, [props.guid]);
 
   function getRows() {
     const hexesPerRow = Math.floor(
@@ -85,7 +109,7 @@ const Grid = props => {
                 {getRows().map((row, index) => (
                   <Row key={index}>
                     {row.map((sli, index) => (
-                      <Hex key={index} sli={sli} timerange={platformState.timerange} strokeWidth />
+                      <Hex key={index} sli={sli} serviceLevelMap={serviceLevelMap} timerange={platformState.timerange} strokeWidth />
                     ))}
                   </Row>
                 ))}

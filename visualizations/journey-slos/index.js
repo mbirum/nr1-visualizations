@@ -8,24 +8,23 @@ import {
 } from 'nr1';
 import Grid from './Grid';
 
-const criticalColor = "#bf362c";
-const warningColor = "#d9c743";
-const goodColor = "#159663";
-
 export default class JourneySlosVisualization extends React.Component {
     
     static propTypes = {
-        journeyName: PropTypes.string,
+        groupName: PropTypes.string,
+        entityGuid: PropTypes.string,
         slis: PropTypes.arrayOf(
             PropTypes.shape({
                 id: PropTypes.string,
+                critical: PropTypes.number,
+                warning: PropTypes.number
             })
         )
     };
 
 
     render() {
-        const { slis, journeyName } = this.props;
+        const { slis, entityGuid, groupName } = this.props;
 
         const propsAvailable = 
             slis && 
@@ -36,21 +35,12 @@ export default class JourneySlosVisualization extends React.Component {
             return <EmptyState />;
         }
 
-        let richSlis = [];
-        for (let i = 0; i < slis.length; i++) {
-            let richSli = {
-                id: slis[i].id,
-                color: (slis[i].id == 0) ? goodColor : (slis[i].id == 1) ? criticalColor : warningColor
-            };
-            richSlis.push(richSli);
-        }
-
         return (
             <AutoSizer>
                 {({width, height}) => (
                     <>
-                        <div className="journey-name">{journeyName}</div>
-                        <Grid slis={richSlis} />
+                        <div className="group-name">{groupName}</div>
+                        <Grid guid={entityGuid} slis={slis} />
                     </>
                 )}
             </AutoSizer>

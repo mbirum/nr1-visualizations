@@ -5,8 +5,13 @@
     "description": "",
     "configuration": [
         {
-            "name": "journeyName",
-            "title": "Journey Name",
+            "name": "groupName",
+            "title": "Name",
+            "type": "string"
+        },
+        {
+            "name": "entityGuid",
+            "title": "Entity GUID",
             "type": "string"
         },
         {
@@ -17,8 +22,18 @@
                 {
                     "name": "id",
                     "title": "SLI ID",
-                    "description": "An SLI ID to include in this journey",
+                    "description": "An SLI ID to include in this group. IDs can be found by viewing the details of a serviceLevel",
                     "type": "string"
+                },
+                {
+                    "name": "critical",
+                    "title": "Critical Threshold",
+                    "type": "number"
+                },
+                {
+                    "name": "warning",
+                    "title": "Warning Threshold",
+                    "type": "number"
                 }
             ]
         }
