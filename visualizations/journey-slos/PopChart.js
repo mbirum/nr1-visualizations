@@ -9,7 +9,10 @@ const PopChart = props => {
     }, [props.sli.id, props.timerange]);
 
     function generateQuery() {
-        let query = sliAttainmentTimeseriesQuery.replaceAll("#sliId", props.sli.id).replaceAll("#since", "1 week ago");
+        let query = sliAttainmentTimeseriesQuery
+            .replaceAll("#critical", props.sli.critical)
+            .replaceAll("#sliId", props.sli.id)
+            .replaceAll("#since", "1 week ago");
         return query;
     }
 
